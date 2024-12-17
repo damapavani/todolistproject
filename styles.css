@@ -42,26 +42,24 @@ header h1 {
     color: white;
     text-align: center;
 }
-
-/* Modified animation for the quote */
 .quote {
     text-align: center;
     font-size: 1.2rem;
     margin-top: 20px;
     color: #7814c9;
     display: inline-block;
-    animation: moveQuoteLeftToRight 6s forwards; /* Changed to 'forwards' */
+    animation: moveQuoteLeftToRight 6s forwards;
 }
 
 @keyframes moveQuoteLeftToRight {
     0% {
-        transform: translateX(-100%); /* Start off-screen */
+        transform: translateX(-100%);
     }
     50% {
-        transform: translateX(0); /* Reaches the center of the container */
+        transform: translateX(0); 
     }
     100% {
-        transform: translateX(calc(100% - 100%)); /* Stop when the quote reaches the container's end */
+        transform: translateX(calc(100% - 100%)); 
     }
 }
 
