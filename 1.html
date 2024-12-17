@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>To-Do List</h1>
+        </header>
+
+        <div class="search-bar">
+            <input type="text" id="search-text" placeholder="Search by name..." oninput="searchTodos()">
+            <select id="status-filter" onchange="searchTodos()">
+                <option value="">Filter by Status</option>
+                <option value="complete">Complete</option>
+                <option value="incomplete">Incomplete</option>
+            </select>
+        </div>
+
+        <div class="todo-form">
+            <input type="text" id="todo-name" placeholder="Enter Todo Name" />
+            <select id="todo-status">
+                <option value="incomplete">Incomplete</option>
+                <option value="complete">Complete</option>
+            </select>
+            <button onclick="addTodo()">Add Todo</button>
+        </div>
+
+        <ul id="todo-list"></ul>
+
+        <button id="clear-all" onclick="clearAll()">Clear All</button>
+    </div>
+
+    <script>
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        function displayTodos() {
+            const todoList = document.getElementById("todo-list");
+            todoList.innerHTML = '';
+
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.classList.add(todo.status);
+                li.innerHTML = `
+                    <span>${todo.name} (${todo.status.charAt(0).toUpperCase() + todo.status.slice(1)})</span>
+                    <button onclick="deleteTodo(${index})">Delete</button>
+                `;
+                todoList.appendChild(li);
+            });
+        }
+
+        function addTodo() {
+            const nameInput = document.getElementById("todo-name");
+            const statusInput = document.getElementById("todo-status");
+
+            if (nameInput.value.trim()) {
+                const newTodo = {
+                    name: nameInput.value.trim(),
+                    status: statusInput.value
+                };
+
+                todos.push(newTodo);
+                localStorage.setItem('todos', JSON.stringify(todos));
+
+                nameInput.value = '';
+                statusInput.value = 'incomplete';
+                displayTodos();
+            }
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            displayTodos();
+        }
+
+        function clearAll() {
+            todos = [];
+            localStorage.setItem('todos', JSON.stringify(todos));
+            displayTodos();
+        }
+
+        function searchTodos() {
+            const searchText = document.getElementById("search-text").value.toLowerCase();
+            const statusFilter = document.getElementById("status-filter").value;
+
+            const filteredTodos = todos.filter(todo => {
+                const matchesText = todo.name.toLowerCase().includes(searchText);
+                const matchesStatus = !statusFilter || todo.status === statusFilter;
+                return matchesText && matchesStatus;
+            });
+        }
+
+
