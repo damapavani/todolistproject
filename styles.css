@@ -27,7 +27,7 @@ body {
     gap: 10px;
     margin-top: 10px;
     margin-bottom: 30px;
-    overflow: hidden; /* Ensure the quote doesn't overflow the container */
+    overflow: hidden; 
 }
 
 header {
@@ -76,7 +76,7 @@ header h1 {
     margin-top: 5px;
     border-radius: 20px;
     font-size: 1rem;
-    width: 70%; /* Adjust for mobile screens */
+    width: 70%; 
 }
 
 .search-bar select {
@@ -84,7 +84,7 @@ header h1 {
     margin-top: 5px;
     border-radius: 20px;
     font-size: 1rem;
-    width: 25%; /* Adjust for mobile screens */
+    width: 25%; 
 }
 
 .todo-form {
@@ -222,8 +222,6 @@ li button:hover {
         margin-top: 10px;
     }
 }
-
-/* Mobile-responsive styles */
 @media (max-width: 768px) {
     header h1 {
         font-size: 1.6rem;
@@ -256,8 +254,6 @@ li button:hover {
         padding: 12px;
     }
 }
-
-/* Mobile-first styles (smaller screens) */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.4rem;
